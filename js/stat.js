@@ -27,8 +27,15 @@ var getMaxElement = function (arr) {
   return maxElement;
 };
 
+var getRandomBlue = function () {
+  var r = 0;
+  var g = 0;
+  var b = Math.floor(Math.random() * 256);
+  var rgb = 'rgb(' + r + ',' + g + ',' + b + ')';
+  return 'rgb(' + r + ', ' + g + ', ' + b + ')';
+};
+
 window.renderStatistics = function (ctx, players, times) {
-  // ctx.transform(1, 0, 0, -1, 0, ctx.height);
   renderCloud(ctx, CLOUD_X + CLOUD_GAP, CLOUD_Y + CLOUD_GAP, 'rgba(0, 0, 0, 0.7)');
   renderCloud(ctx, CLOUD_X, CLOUD_Y, '#ffffff');
 
@@ -42,14 +49,23 @@ window.renderStatistics = function (ctx, players, times) {
     ctx.fillStyle = 'black';
     ctx.font = 'normal 16px PT Mono';
     ctx.fillText(players[i], CLOUD_X + BAR_GAP + (BAR_WIDTH + BAR_GAP) * i, CLOUD_HEIGHT);
-    ctx.fillStyle = '#110cf2';
-    ctx.fillRect(CLOUD_X + BAR_GAP + (BAR_WIDTH + BAR_GAP) * i, CLOUD_Y + BAR_GAP + TEXT_GAP * 2, BAR_WIDTH, (barHeight * times[i]) / maxTime);
-
-    // как покрасить столбцы согласно имени?? это условие не работает
-    if (players[i] === ['Вы']) {
+    if (players[i] === 'Вы') {
       ctx.fillStyle = 'rgba(255, 0, 0, 1)';
     } else {
-      ctx.fillStyle = '#110cf2';
+      ctx.fillStyle = getRandomBlue();
+      console.log(getRandomBlue());
     }
+
+    var X = CLOUD_X + BAR_GAP + (BAR_WIDTH + BAR_GAP) * i;
+    var HEIGHT = (barHeight * times[i]) / maxTime;
+    var Y = CLOUD_HEIGHT - (HEIGHT + 20);
+
+    ctx.fillRect(
+      X,
+      Y,
+      BAR_WIDTH,
+      HEIGHT
+    );
+
   }
 };
