@@ -23,7 +23,6 @@ var getMaxElement = function (arr) {
       maxElement = arr[i];
     }
   }
-
   return maxElement;
 };
 
@@ -31,7 +30,6 @@ var getRandomBlue = function () {
   var r = 0;
   var g = 0;
   var b = Math.floor(Math.random() * 256);
-  // var rgb = 'rgb(' + r + ',' + g + ',' + b + ')';
   return 'rgb(' + r + ', ' + g + ', ' + b + ')';
 };
 
@@ -53,19 +51,12 @@ window.renderStatistics = function (ctx, players, times) {
       ctx.fillStyle = 'rgba(255, 0, 0, 1)';
     } else {
       ctx.fillStyle = getRandomBlue();
-      // console.log(getRandomBlue());
     }
 
     var X = CLOUD_X + BAR_GAP + (BAR_WIDTH + BAR_GAP) * i;
     var HEIGHT = (barHeight * times[i]) / maxTime;
     var Y = CLOUD_HEIGHT - (HEIGHT + 20);
 
-    ctx.fillRect(
-        X,
-        Y,
-        BAR_WIDTH,
-        HEIGHT
-    );
-
+    ctx.fillRect(X, Y, BAR_WIDTH, HEIGHT);
   }
 };
