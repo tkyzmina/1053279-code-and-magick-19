@@ -16,8 +16,7 @@
   });
 
   var onPopupEscPress = function (evt) {
-    console.log('* ', window.utils.ESC_KEY);
-    if (!booleanNameInput === true && evt.key === window.utils.ESC_KEY) {
+    if (!booleanNameInput && evt.key === window.utils.ESC_KEY) {
       closePopup();
     }
   };
